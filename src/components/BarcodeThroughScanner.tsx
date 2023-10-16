@@ -1,22 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, DeviceEventEmitter, NativeModules} from 'react-native';
+import KeyEvent from 'react-native-keyevent';
 
 function BarcodeScannerComponent() {
   const [scannedData, setScannedData] = useState('');
 
   useEffect(() => {
-    NativeModules.BarcodeScanner.startBarcodeScanning();
+    let barCode = '';
+    KeyEvent.onKeyDownListener(keyEvent => {
+      const pressedKey = keyEvent.pressedKey;
 
-    const subscription = DeviceEventEmitter.addListener(
-      'onBarcodeScanned',
-      data => {
-        setScannedData(data);
-      },
-    );
-
-    return () => {
-      subscription.remove();
-    };
+      if (pressedKey == '\n') {
+        setScannedData(barCode);
+      } else if (/^\d+$/.test(pressedKey)) {
+        barCode = barCode + pressedKey;
+      }
+    });
   }, []);
 
   return (
