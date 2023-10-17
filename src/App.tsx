@@ -1,9 +1,15 @@
+import {useContext} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet, Button} from 'react-native';
+import {BarcodeContext} from '../App';
 
 const App = ({navigation}) => {
+  const {barcode, setBarcode} = useContext(BarcodeContext);
+
   return (
     <View style={{flex: 1}}>
-      <Text style={{textAlign: 'center'}}> Barcode Reader App</Text>
+      <Text style={{fontSize: 20, textAlign: 'center'}}>
+        Barcode Scanned: {'' + barcode}
+      </Text>
       <View
         style={{
           flex: 1,
@@ -12,20 +18,31 @@ const App = ({navigation}) => {
           alignItems: 'center',
           gap: 20,
         }}>
-        <TouchableOpacity
-          onPress={() => {
-            console.log('clicked...');
-            navigation.navigate('BarcodeThroughScanner');
-          }}>
-          <Text> Scan Barcode Through Scanner </Text>
+        <TouchableOpacity>
+          <Button
+            title="Scan Through Scanner"
+            onPress={() => {
+              console.log('clicked...');
+              navigation.navigate('BarcodeThroughScanner');
+            }}
+          />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            console.log('clicked...');
-            navigation.navigate('BarcodeThroughCamera');
-          }}>
-          <Text> Scan Barcode Through Camera </Text>
+        <TouchableOpacity>
+          <Button
+            title="Scan Through Camera"
+            onPress={() => {
+              console.log('clicked...');
+              navigation.navigate('BarcodeThroughCamera');
+            }}
+          />
         </TouchableOpacity>
+
+        <Button
+          title="Reset"
+          onPress={() => {
+            setBarcode('');
+          }}
+        />
       </View>
     </View>
   );
