@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from '../App';
-import BarcodeThroughCamera from '../components/BarcodeThroughCamera';
-import BarcodeThroughScanner from '../components/BarcodeThroughScanner';
+import Home from '../screens/Home';
+import BarcodeThroughCamera from '../screens/BarcodeThroughCamera';
+import BarcodeThroughScanner from '../screens/BarcodeThroughScanner';
 
 const Stack = createNativeStackNavigator();
 

@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet, Button} from 'react-native';
-import {BarcodeContext} from '../App';
+import {BarcodeContext} from '../../App';
 
 const App = ({navigation}) => {
   const {barcode, setBarcode} = useContext(BarcodeContext);

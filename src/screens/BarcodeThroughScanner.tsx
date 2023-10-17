@@ -12,7 +12,7 @@ function BarcodeScannerComponent({navigation}) {
     KeyEvent.onKeyUpListener(keyEvent => {
       const pressedKey = keyEvent.pressedKey;
 
-      if (pressedKey != '\u0000') {
+      if (pressedKey != '\u0000' && pressedKey != '\n') {
         barCode = barCode.concat(pressedKey.toString()).concat('');
       }
 
