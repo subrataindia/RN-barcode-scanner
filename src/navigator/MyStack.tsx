@@ -2,6 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../screens/Home';
 import BarcodeThroughCamera from '../screens/BarcodeThroughCamera';
 import BarcodeThroughScanner from '../screens/BarcodeThroughScanner';
+import PrintBarcode from '../screens/PrintBarcode';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,11 @@ export default function MyStack() {
         name="BarcodeThroughScanner"
         component={BarcodeThroughScanner}
         options={{headerTitle: 'Scan Using Scanner'}}
+      />
+      <Stack.Screen
+        name="PrintBarcode"
+        component={PrintBarcode}
+        options={{headerTitle: 'Print Barcode'}}
       />
     </Stack.Navigator>
   );

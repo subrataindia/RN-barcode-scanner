@@ -1,9 +1,20 @@
-import {useContext} from 'react';
+import {useCallback, useContext} from 'react';
 import {View, TouchableOpacity, Text, StyleSheet, Button} from 'react-native';
-import {BarcodeContext} from '../../App';
+import {BarcodeContext, BarcodeContextType} from '../../App';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RouteStackParams} from '../navigator/RouteParams';
+import {RouteKeys} from '../navigator/RouteKeys';
 
-const App = ({navigation}) => {
-  const {barcode, setBarcode} = useContext(BarcodeContext);
+const App = ({
+  navigation,
+}: {
+  navigation: NativeStackNavigationProp<RouteStackParams, RouteKeys.Home>;
+}) => {
+  const {barcode, setBarcode} = useContext(BarcodeContext)!; // // Use "!" to assert that it's not null or undefined
+
+  const handlePrintBarcode = useCallback(() => {
+    navigation.navigate(RouteKeys.PrintBarcode);
+  }, []);
 
   return (
     <View style={{flex: 1}}>
@@ -23,7 +34,7 @@ const App = ({navigation}) => {
             title="Scan Through Scanner"
             onPress={() => {
               console.log('clicked...');
-              navigation.navigate('BarcodeThroughScanner');
+              navigation.navigate(RouteKeys.BarcodeThroughScanner);
             }}
           />
         </TouchableOpacity>
@@ -32,7 +43,7 @@ const App = ({navigation}) => {
             title="Scan Through Camera"
             onPress={() => {
               console.log('clicked...');
-              navigation.navigate('BarcodeThroughCamera');
+              navigation.navigate(RouteKeys.BarcodeThroughCamera);
             }}
           />
         </TouchableOpacity>
@@ -43,6 +54,7 @@ const App = ({navigation}) => {
             setBarcode('');
           }}
         />
+        <Button title="Print Barcode" onPress={handlePrintBarcode} />
       </View>
     </View>
   );
